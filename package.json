@@ -1,0 +1,26 @@
+npm install knex -g{
+  "name": "test-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elainecode/test-app.git"
+  },
+  "keywords": [],
+  "author": "Elaine",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elainecode/test-app/issues"
+  },
+  "homepage": "https://github.com/elainecode/test-app#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "knex": "^0.16.3",
+    "pg": "^7.8.2"
+  }
+}
