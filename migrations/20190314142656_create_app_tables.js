@@ -17,11 +17,10 @@ exports.up = function(knex, Promise) {
   }),
      knex.schema.createTable('favorites', table => {
       table.increments('id').primary();
-      table.increments('id')
-      table.foreign('user_id')
+      table.integer('user_id')
       .references('id')
       .inTable('users');
-       table.foreign('gif_id')
+       table.integer('gif_id')
       .references('id')
       .inTable('gifs');
   }),
@@ -31,10 +30,10 @@ exports.up = function(knex, Promise) {
     }),
       knex.schema.createTable('hashtags', table => {
       table.increments('id').primary();
-      table.foreign('gif_id')
+      table.integer('gif_id')
       .references('id')
       .inTable('gifs');
-       table.foreign('tag_id')
+       table.integer('tag_id')
       .references('id')
       .inTable('tags');
     })

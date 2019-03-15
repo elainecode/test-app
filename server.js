@@ -4,4 +4,4 @@ const app = express();
 
 
 
-app.listen(PORT, () => console.log('running'))
+app.listen(PORT, () => console.log('' + process.env.NODE_ENV))
