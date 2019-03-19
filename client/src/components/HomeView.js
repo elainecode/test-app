@@ -15,15 +15,15 @@ fetchGifs = ()  => {
 }
 
 fetchTags = ()  => {
-  fetch('/api/v1/tags')
+  return fetch('/api/v1/tags')
   .then(response => response.json())
-  .then( data => console.log(data))
 }
 
 componentDidMount = () => {
   this.fetchGifs()
   .then(gifs => this.setState({gifs}))
-  this.fetchTags()  
+  this.fetchTags()
+  .then(tags => this.setState({tags}))  
 }
 
   render() {

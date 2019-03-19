@@ -4,14 +4,22 @@ import './css/homeview.css'
 
 class ScrollSearch extends Component {
   render() {
+    const { tags } = this.props
     return (
        <div class="column is-one-quarter">
         <ul id="tag-search">
+          
+         { tags.map( t => { 
+          return (
           <li>
           <span id="search-tag" class="tag">
-            Test
+          {t.tagname}
            </span>
-          </li>
+           </li>
+           )
+          })
+       }
+    
        </ul>
        </div>
     );

@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from 'react';
+import MaterialIcon, {colorPalette} from 'material-icons-react';
 
 
 class Gif extends Component {
@@ -6,8 +7,14 @@ class Gif extends Component {
     const { gif }  = this.props
     return (
         <div class="card-image">
-         <div class="overlay"></div>
-          { <img  src={gif.url} alt="gif.title"/> }
+        <span class="heart">
+        <MaterialIcon 
+        size="small"
+        icon="favorite_border" 
+        color={colorPalette.pink.A100} 
+        />
+         </span>
+          <img  src={gif.url} alt="gif.title"/>
         </div>
     );
   }
