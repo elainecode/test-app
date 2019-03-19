@@ -30,19 +30,14 @@ exports.seed = async (knex, Promise) => {
 
      })
      .then( async (gif_array) => {
-      
-      const tagData = await Promise.all(retrieve.allTags())
-        
+      const tagData = await Promise.all(retrieve.allTags()) 
       const tag_array = await knex('tags')
       .returning('*')
       .insert(tagData)
-
      return matchTagAndGif(gif_array, tag_array)
-
       })
      .then( async (hashtag_array) => {
       return knex('hashtags').insert(hashtag_array)
-
 });
 
 }
@@ -50,7 +45,6 @@ exports.seed = async (knex, Promise) => {
 const matchTagAndGif = (gif_array, tag_array) => {
      hashtag_array = []
      gif_array.forEach((gif) => {
-      console.log(gif)
         for (let i = 0; i < tag_array.length; i++){
           if(gif.tags.includes(tag_array[i].tagname)) {
             hashtag_array.push({tag_id: tag_array[i].id, gif_id: gif.id})
