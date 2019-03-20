@@ -1,10 +1,10 @@
 ## Reaction Gif App -- Single Page Application
 
-![homepage](https://github.com/elainecode/test-app/blob/master/test.png)
-
 ### Description
 
 SPA, single page application designed to view and sort gifs by reaction. 
+
+![homepage](https://github.com/elainecode/test-app/blob/master/test.png)
 
 ### Features
 
