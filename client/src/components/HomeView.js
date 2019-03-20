@@ -1,33 +1,12 @@
 import React, { Fragment, Component } from 'react';
+import { Route, Switch, withRouter } from "react-router-dom";
 import GifContainer from './GifContainer'
 import ScrollSearch from './ScrollSearch'
 
 class HomeView extends Component {
 
-state = {
-  gifs:  [],
-  tags: []
-}
-
-fetchGifs = ()  => {
-  return fetch('/api/v1/gifs')
-  .then(response => response.json())
-}
-
-fetchTags = ()  => {
-  return fetch('/api/v1/tags')
-  .then(response => response.json())
-}
-
-componentDidMount = () => {
-  this.fetchGifs()
-  .then(gifs => this.setState({gifs}))
-  this.fetchTags()
-  .then(tags => this.setState({tags}))  
-}
-
   render() {
-    const { gifs, tags }  = this.state
+    const { gifs, tags }  = this.props
     return (
     <div class="columns">
        <ScrollSearch
