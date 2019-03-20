@@ -1,17 +1,24 @@
 #gifselected {
-width: 70%;
-margin: 1%;
-background: transparent;
-box-shadow: 7px 15px 40px rgba(96, 80, 249, 48%);
+width: 85%;
 }
 
-/*.card-image:nth-child(odd){
-  box-shadow: 7px 15px 40px rgba(249, 64, 64, 48%)
+.related {
+  width: 80%;
 }
-*/
-.card-image img {
+
+.card-image img, .related img, #gifselected img {
   width: 100%;
   height: 100%; 
+  box-shadow: 7px 15px 40px rgba(96, 80, 249, 48%);
+}
+
+.related-img {
+  display: block;
+  margin: 5% 0;
+}
+
+#tagname:nth-child(odd) {
+  background: #ff3860;
 }
 
 hr {
@@ -20,5 +27,17 @@ hr {
     display: block;
     width: 70%;
     height: 2px;
-    margin: 4rem 0 1rem 0;
+    margin: 3rem 0 2rem 0;
+}
+
+#tumblr {
+  background: #303d4d;
+}
+
+#twitter {
+  background: #1CA1F2;
+}
+
+#facebook {
+  background: #3a5a98;
 }

@@ -1,9 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTwitter, faTumblr, faFacebookF } from '@fortawesome/free-brands-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+library.add(
+  faTwitter,
+  faTumblr,
+  faFacebookF
+);
 
 ReactDOM.render(
   <BrowserRouter>

@@ -6,8 +6,10 @@ class RelatedTags extends Component {
   render() {
     const { tags } = this.props
     return (
-    <>
-
+        <>
+         {
+            tags.map( tag =><a class="button is-info">{tag.tagname}</a>)
+          }
      </>
     );
   }
