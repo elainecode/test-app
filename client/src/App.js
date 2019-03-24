@@ -20,7 +20,7 @@ class App extends Component {
 
 fetchTags = ()  => {
   return fetch('/api/v1/tags')
-  .then(response => response.json())
+  .then(response =>  response.json())
 }
 
 componentDidMount = () => {

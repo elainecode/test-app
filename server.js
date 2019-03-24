@@ -1,4 +1,6 @@
 const express = require('express');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 const cors = require('cors')
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
@@ -13,12 +15,41 @@ app.use(cors());
 app.options('*', cors());
 app.use(bodyParser.json());
 
+require('./auth');
+
+//const router = express.Router();
+
+//When the user sends a post request to this route, passport authenticates the user based on the
+//middleware created previously
 
 app.use( async (err, req, res, next) => {
   console.log("our middleware ran!" || err.message);
   return next();
 });
 
+app.post('/api/v1/signup', async (req, res, next) => {
+  passport.authenticate('signup', (err, user, info) => {
+    if (err || info) {
+      console.log(err || info)
+      return res.json(err || info)
+    } else {
+      console.log(user)
+      return res.status(200).json(user)
+    }
+  })(req, res, next)
+});
+
+app.post('/api/v1/login', async (req, res, next) => {
+  passport.authenticate('login', (err, user, info) => {
+    if (err || info) {
+      console.log('err or info', err || info)
+      return res.json(err || info)
+    } else {
+      console.log('user', user)
+      return res.status(200).json(user)
+    }
+  })(req, res, next)
+});
 
 app.get('/api/v1/gifs', async (req, res, next) => {
   try { 
