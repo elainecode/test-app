@@ -4,11 +4,11 @@ import './css/homeview.css'
 
 class GifList extends Component {
   render() {
-    const { gifs } = this.props
+    const {gifs, favorites, toggleFavorites} = this.props
     return (
       <div id="list">
      { 
-        gifs.map(gif => <Gif gif={gif}/>)
+        gifs.map(gif => <Gif gif={gif} favorites={favorites} toggleFavorites={toggleFavorites}/>)
 
        }
       </div>

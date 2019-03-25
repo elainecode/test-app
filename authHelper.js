@@ -40,8 +40,9 @@ const createUser = async (req) => {
 
 
 const findUser = async (req) => {
+  console.log(req.body)
   const foundUser = await db('users')
-  .where({ email: req.body.email })
+  .where({ username: req.body.username })
   .first()
   if (foundUser != undefined || null) {
     console.log('foundUser in findUSER:', foundUser)
@@ -60,4 +61,23 @@ const findUser = async (req) => {
   
 }
 
-module.exports = { createUser, findUser }
+
+const find_User_Auth = async (decoded) => {
+  console.log('inside auth path', decoded)
+  try {
+  const foundUser = await db('users')
+  .where({ username: decoded })
+  .first()
+  if (foundUser != undefined || null) {
+      return foundUser
+  } else {
+    return {usernotfound: 'incorrect credentials'}
+  }
+} catch(e) {
+   console.log('error inside auth path: ', e)
+  return e
+}
+  
+}
+
+module.exports = { createUser, findUser, find_User_Auth }

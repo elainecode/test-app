@@ -1,6 +1,8 @@
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
-const { createUser, findUser }  = require('./authHelper');
+const JWTstrategy = require('passport-jwt').Strategy;
+const ExtractJWT = require('passport-jwt').ExtractJwt;
+const { createUser, findUser, find_User_Auth }  = require('./authHelper');
 
 
 //Create a passport middleware to handle user registration
@@ -28,14 +30,14 @@ passport.use('signup', new localStrategy({
 }));
 
 passport.use('login', new localStrategy({
-  usernameField: 'email',
+  usernameField: 'username',
   passwordField: 'password',
   passReqToCallback: true,
   session: false
-}, async (req, email, password, done) => {
+}, async (req, username, password, done) => {
     try {
       //Save the information provided by the user to the the database
-      console.log('REQ:', req.body)
+      console.log('REQ:', req)
       const user = await findUser(req);
       //Send the user information to the next middleware
       if (user.nomatch) {
@@ -56,4 +58,28 @@ passport.use('login', new localStrategy({
     }
 }));
 
+
+
+//This verifies that the token sent by the user is valid
+passport.use('jwt', new JWTstrategy({
+  secretOrKey: process.env.SECRET,
+  session: false,
+  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
+}, async (jwt_payload, done) => {
+  try {
+    console.log('in passport', jwt_payload.id)
+    const user = await find_User_Auth(jwt_payload.id);
+      if (user.usernotfound || user.message) {
+        let err = user.usernotfound || user.message;
+       console.log('user.usernotfound:', err)
+        return done(null, false, { message: err});
+      } else {
+        console.log('###### LOL #######:', user)
+        return done(null, user)
+      }
+      
+  } catch (error) {
+    done(error);
+  }
+}));
 

@@ -1,0 +1,26 @@
+#login {
+  width: 40%;
+  top: 5%;
+  right: 30%;
+  position: fixed;
+  z-index: 40;
+}
+
+.form-button {
+  color: #fff;
+  background: #7b4397;
+  width: 100%;
+}
+
+#delete {
+ right: 5%;
+ position: absolute;
+}
+
+.form-button:hover {
+  color: #fff;
+}
+
+.modal-background {
+  z-index: 33;
+}

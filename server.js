@@ -46,7 +46,35 @@ app.post('/api/v1/login', async (req, res, next) => {
       return res.json(err || info)
     } else {
       console.log('user', user)
+      const token = jwt.sign({id: user.username}, process.env.SECRET)
+      return res.status(200).send({ user: user, token: token})
+    }
+  })(req, res, next)
+});
+
+app.get('/api/v1/auth', async (req, res, next) => {
+  passport.authenticate('jwt', (err, user, info) => {
+    if (err || info) {
+      console.log('err or info', err || info)
+      return res.json(err || info)
+    } 
+    if (user) {
+      console.log('user', user)
       return res.status(200).json(user)
+    }
+  })(req, res, next)
+});
+
+app.get('/api/v1/auth/favorites', async (req, res, next) => {
+  passport.authenticate('jwt', (err, user, info) => {
+    if (err || info) {
+      console.log('err or info', err || info)
+      return res.json(err || info)
+    } 
+    if (user) {
+      //find gif_id in gifs table by title or uid in req.body
+      //add gif_id and user_id returned from passport to favorites table
+      //return the favorite to clientside
     }
   })(req, res, next)
 });

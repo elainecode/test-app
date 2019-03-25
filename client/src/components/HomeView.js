@@ -6,7 +6,7 @@ import ScrollSearch from './ScrollSearch'
 class HomeView extends Component {
 
   render() {
-    const { gifs, tags }  = this.props
+    const { gifs, tags, favorites, toggleFavorites }  = this.props
     return (
     <div class="columns">
        <ScrollSearch
@@ -14,6 +14,8 @@ class HomeView extends Component {
        />
        <GifContainer
         gifs={gifs}
+        favorites={favorites}
+        toggleFavorites={toggleFavorites}
         />
        </div>    
     );
