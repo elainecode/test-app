@@ -39,6 +39,18 @@ getFavoritesView = (e) => {
       <>
       <nav className="navbar is-fixed-top nav-color has-shadow"
        role="navigation" aria-label="main navigation">
+      <div class="navbar-item">
+      <form>
+       <div class="field has-addons">
+      <div class="control">
+    <input class="input is-medium" type="text" placeholder="Find a repository"/>
+       </div>
+      <div class="control">
+      <input type='submit' class="button is-medium" value='submit'/>
+  </div>
+</div>
+  </form>
+      </div>
       <div class="navbar-end">
       <div class="navbar-item">
 

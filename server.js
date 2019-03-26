@@ -66,15 +66,25 @@ app.get('/api/v1/auth', async (req, res, next) => {
 });
 
 app.get('/api/v1/auth/favorites', async (req, res, next) => {
+  passport.authenticate('jwtFavorites', (err, user, info) => {
+    if (err || info) {
+      console.log('err or info', err || info)
+      return res.json(err || info)
+    } 
+    if (user) {
+      return res.json(user.favorites)
+    }
+  })(req, res, next)
+});
+
+app.post('/api/v1/auth/favorites/toggle', async (req, res, next) => {
   passport.authenticate('jwt', (err, user, info) => {
     if (err || info) {
       console.log('err or info', err || info)
       return res.json(err || info)
     } 
     if (user) {
-      //find gif_id in gifs table by title or uid in req.body
-      //add gif_id and user_id returned from passport to favorites table
-      //return the favorite to clientside
+      return res.json(user)
     }
   })(req, res, next)
 });

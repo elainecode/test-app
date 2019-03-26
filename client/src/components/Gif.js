@@ -8,7 +8,7 @@ class Gif extends Component {
 constructor(props) {
 super(props)
   this.state = {
-      fave: this.props.favorites.includes(this.props.gif.uid) ? 'favorite': 'favorite_border'
+      fave: this.props.favorites.includes(this.props.gif.uid) ? 'favorite' : 'favorite_border'
   }
 }
 
@@ -18,17 +18,28 @@ viewGif = () => {
    this.props.history.push(title);
 } 
 
-toggleFaves = () => {
-this.state.fave === 'favorite_border'
-? this.setState({fave: 'favorite'}) // seperate function to backend
-: this.setState({fave: 'favorite_border'})  // seperate function to backend
+toggleFaves = (fave_value) => {
+  this.saveChanges(fave_value)
+  this.props.SaveOrDeleteFavorites(this.props.gif.uid) 
+}
+
+saveChanges = (fave_value) => {
+switch(fave_value) {
+  case 'favorite_border':
+        this.setState({fave: 'favorite'})
+    break;
+  case 'favorite':
+    this.setState({fave: 'favorite_border'})
+    break;
+  default:
+}
 }
 
 
 handleClick = (e) => {
 e.stopPropagation();
-console.log(e.target)
-this.toggleFaves()
+console.log(this.props.favorites.includes(this.props.gif.uid))
+this.toggleFaves(this.state.fave)
 }
 
 
@@ -46,6 +57,7 @@ this.toggleFaves()
         color={colorPalette.pink.A100} 
         />
       }
+
       { this.state.fave === 'favorite' &&
          <MaterialIcon 
         size="small"
@@ -53,6 +65,7 @@ this.toggleFaves()
         color={colorPalette.pink.A100} 
         />
       }
+    
          </span>
         
         

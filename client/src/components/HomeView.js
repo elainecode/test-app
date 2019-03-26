@@ -6,8 +6,32 @@ import ScrollSearch from './ScrollSearch'
 class HomeView extends Component {
 
   render() {
-    const { gifs, tags, favorites, toggleFavorites }  = this.props
+    const { gifs, tags, favorites, SaveOrDeleteFavorites }  = this.props
     return (
+    <>
+  <div class="columns">
+      <div id="home-header" class='column is-4 is-offset-1'>
+
+      <div class="hero-header">
+      <h1 class="title">Shade Gifs</h1>
+    <h2 class="subtitle">The best reaction gifs in one place</h2>
+    <div class="header-form">
+     <form>
+       <div class="field has-addons">
+      <div class="control">
+    <input class="input" type="text" placeholder="Find a repository"/>
+       </div>
+      <div class="control">
+      <input type='submit' class="button" value='submit'/>
+  </div>
+</div>
+  </form>
+  </div>
+  </div>
+      </div>
+      <div id="img-header" class='column'>
+      </div>
+      </div>
     <div class="columns">
        <ScrollSearch
         tags={tags}
@@ -15,9 +39,10 @@ class HomeView extends Component {
        <GifContainer
         gifs={gifs}
         favorites={favorites}
-        toggleFavorites={toggleFavorites}
+        SaveOrDeleteFavorites={SaveOrDeleteFavorites}
         />
-       </div>    
+       </div> 
+       </>   
     );
   }
 }

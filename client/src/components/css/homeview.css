@@ -1,4 +1,22 @@
 
+#home-header {
+  height: 33%;
+}
+
+.hero-header {
+  margin: 20% auto;
+}
+
+.hero-header .subtitle {
+  margin-bottom: 0.5rem;
+}
+
+#img-header {
+ background: url('https://media1.tenor.com/images/24fff78e8eed2fe1a88dcaa2e590d433/tenor.gif?itemid=5205412');
+ background-size: cover;
+}
+
+
  #list {
     margin: 0;
     padding: 0;
@@ -6,6 +24,7 @@
     flex-wrap: wrap;
     justify-content: left;
 }
+
 
 #list img {
   width: 100%;

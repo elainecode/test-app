@@ -33,19 +33,33 @@ fetchTags = ()  => {
 }
 
 fetchFavorites = () => {
-
+const tkn = localStorage.getItem('tkn')
+ return fetch('/api/v1/auth/favorites', {
+  method: 'GET',
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tkn}`
+    }
+ })
+ .then(response =>  response.json())
 }
 
-toggleFavorites = (gif_uid) => {
+SaveOrDeleteFavorites = (gif_uid) => {
+  
+const  data = {uid: gif_uid}
+const tkn = localStorage.getItem('tkn')
 
-const favorites = this.state.favorites.slice()
-const index = favorites.indexOf(gif_uid)
-index > -1
-? favorites.slice(index, 1)
-: favorites.push(gif_uid)
-
-this.setState({favorites})
-console.log(favorites)
+  console.log('adding favorites....: ', data.uid)
+  
+  fetch('/api/v1/auth/favorites/toggle', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${tkn}`
+      },
+      body: JSON.stringify(data)
+    }).then(res => res.json())
+      .then(data => console.log(data))
 }
 
 fetchUser = () => {
@@ -60,12 +74,12 @@ fetchUser = () => {
 }
 
 displaySignupModal = (e) => {
-  console.log('???')
+  console.log('sign up modal opened')
   this.setState({signupModal: !this.state.signupModal})
 }
 
 displayLoginModal = (e) => {
-  console.log('???')
+  console.log('login modal open')
   this.setState({loginModal: !this.state.loginModal})
 }
 
@@ -80,12 +94,17 @@ componentDidMount = () => {
   .then(tags => this.setState({tags})) 
   this.fetchUser()
   .then(user => {
-  this.setState({userID: user.id})
-  this.updateIsLoggedIn()
-}) 
+    this.setState({userID: user.id})
+    this.updateIsLoggedIn()
+  })
+  this.fetchFavorites() 
+  .then(response => {
+    const favorites = response.map(data => data.uid)
+    this.setState({favorites})
+  })
 }
   render() {
-    const { displaySignupModal, displayLoginModal, updateIsLoggedIn, toggleFavorites } = this
+    const { displaySignupModal, displayLoginModal, updateIsLoggedIn, SaveOrDeleteFavorites } = this
     const {
       gifs,
       favorites, 
@@ -115,9 +134,9 @@ componentDidMount = () => {
         />
      }
        <Switch>
-        <Route exact path='/' render={(props) => <HomeView {...props}  toggleFavorites={toggleFavorites} favorites={favorites} tags={tags} gifs={gifs} />} />
-         <Route path='/gifs/:title' render={(props) => <GifView {...props} favorites={favorites} toggleFavorites={toggleFavorites} gifs={gifs} />} />
-          <Route path='/user/:id/favorites' render={(props) => <FavoritesView {...props} toggleFavorites={toggleFavorites} favorites={favorites} isLoggedIn={isLoggedIn} />} />
+        <Route exact path='/' render={(props) => <HomeView {...props}  SaveOrDeleteFavorites={SaveOrDeleteFavorites} favorites={favorites} tags={tags} gifs={gifs} />} />
+         <Route path='/gifs/:title' render={(props) => <GifView {...props} favorites={favorites} SaveOrDeleteFavorites={SaveOrDeleteFavorites} gifs={gifs} />} />
+          <Route path='/user/:id/favorites' render={(props) => <FavoritesView {...props} SaveOrDeleteFavorites={SaveOrDeleteFavorites} favorites={favorites} isLoggedIn={isLoggedIn} />} />
        </Switch>
        </>
     );

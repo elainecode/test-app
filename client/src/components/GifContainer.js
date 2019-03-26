@@ -3,13 +3,13 @@ import GifList from './GifList'
 
 class GifContainer extends Component {
   render() {
-    const {gifs, favorites, toggleFavorites} = this.props
+    const {gifs, favorites, SaveOrDeleteFavorites} = this.props
     return (
        <div class="column">
        <GifList 
         gifs={gifs}
         favorites={favorites}
-        toggleFavorites={toggleFavorites}
+        SaveOrDeleteFavorites={SaveOrDeleteFavorites}
 
        />
        </div>    
