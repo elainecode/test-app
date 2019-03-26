@@ -9,20 +9,20 @@ class HomeView extends Component {
     const { gifs, tags, favorites, SaveOrDeleteFavorites }  = this.props
     return (
     <>
-  <div class="columns">
-      <div id="home-header" class='column is-4 is-offset-1'>
+  <div id="home-header"class="columns home-header-parent">
+      <div  class='column is-4 is-offset-1'>
 
       <div class="hero-header">
       <h1 class="title">Shade Gifs</h1>
-    <h2 class="subtitle">The best reaction gifs in one place</h2>
+    <h2 class="subtitle">The <em>best</em> reaction gifs in one place</h2>
     <div class="header-form">
      <form>
        <div class="field has-addons">
       <div class="control">
-    <input class="input" type="text" placeholder="Find a repository"/>
+    <input class="input" type="text" placeholder="Search Gifs"/>
        </div>
       <div class="control">
-      <input type='submit' class="button" value='submit'/>
+      <input id='header-button' type='submit' class="button" value='search'/>
   </div>
 </div>
   </form>

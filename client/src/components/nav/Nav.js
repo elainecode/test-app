@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter } from "react-router-dom";
+import logo from '../../logo.svg';
 import './nav.css';
 
 class Nav extends Component {
@@ -39,14 +40,19 @@ getFavoritesView = (e) => {
       <>
       <nav className="navbar is-fixed-top nav-color has-shadow"
        role="navigation" aria-label="main navigation">
-      <div class="navbar-item">
+       <div class="navbar-brand">
+       <div class="navbar-item">
+       <img id='nav-logo' src={logo} alt="logo" />
+       </div>
+       </div>
+      <div id='nav-form' class="navbar-item">
       <form>
        <div class="field has-addons">
-      <div class="control">
-    <input class="input is-medium" type="text" placeholder="Find a repository"/>
+      <div class="control is-expanded">
+    <input id='nav-input' class="input is-static" type="text" placeholder="  Search"/>
        </div>
       <div class="control">
-      <input type='submit' class="button is-medium" value='submit'/>
+      <input id='nav-button' type='submit' class="button" value='submit'/>
   </div>
 </div>
   </form>
@@ -57,10 +63,10 @@ getFavoritesView = (e) => {
     { !this.props.isLoggedIn  &&
         <div class="buttons">
           <a class="button nav-buttons" onClick={displaySignupModal}>
-            <strong>Sign up</strong>
+            Sign up
           </a>
           <a class="button nav-buttons" onClick={displayLoginModal}>
-            <strong>Log in</strong>
+            Log in
           </a>
         </div> 
       }
@@ -69,10 +75,10 @@ getFavoritesView = (e) => {
 
             <div class="buttons">
           <a class="button nav-buttons" onClick={this.getFavoritesView}>
-            <strong>Favorites</strong>
+            Favorites
           </a>
           <a class="button nav-buttons">
-            <strong>Log out</strong>
+            Log out
           </a>
         </div>
         }

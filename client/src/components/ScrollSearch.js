@@ -6,7 +6,7 @@ class ScrollSearch extends Component {
   render() {
     const { tags } = this.props
     return (
-       <div class="column is-one-quarter">
+       <div class="column is-1 is-offset-1">
         <ul id="tag-search">
           
          { tags.map( t => { 

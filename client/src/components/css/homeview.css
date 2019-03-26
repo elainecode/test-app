@@ -1,7 +1,11 @@
 
 #home-header {
-  height: 33%;
+background: #4776E6;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #8E54E9, #4776E6);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #8E54E9, #4776E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
+
 
 .hero-header {
   margin: 20% auto;
@@ -11,11 +15,20 @@
   margin-bottom: 0.5rem;
 }
 
+
+.hero-header h1, .hero-header h2 {
+  color: white;
+}
+
 #img-header {
  background: url('https://media1.tenor.com/images/24fff78e8eed2fe1a88dcaa2e590d433/tenor.gif?itemid=5205412');
  background-size: cover;
+ opacity: 0.8;
 }
 
+#header-button {
+  color: #7b4397;
+}
 
  #list {
     margin: 0;
@@ -31,7 +44,6 @@
 }
 
 #tag-search {
-  margin-left: 1%;
   width: 100%;
   height: 50%;
   overflow: scroll;
@@ -43,14 +55,18 @@ ul {
 
 li {
   display: block;
-  padding: 0.4rem;
-  text-align: center;
+  margin: 0.5rem;
+  text-align: left;
 }
 
 #search-tag {
   font-size: 1rem;
   color: #7b4397;
-  background: transparent;
+}
+
+#search-tag:hover {
+  cursor: pointer;
+  color: black;
 }
 
 .card-image {
@@ -58,12 +74,12 @@ width: 30%;
 margin: 1%;
 border-radius: 0.5em;
 background: transparent;
-box-shadow: 7px 15px 40px rgba(96, 80, 249, 48%);
+box-shadow: 7px 15px 20px rgba(96, 80, 249, 25%);
 position: relative;
 }
 
 .card-image:nth-child(odd){
-  box-shadow: 7px 15px 40px rgba(249, 64, 64, 48%)
+  box-shadow: 7px 15px 20px rgba(249, 64, 64, 25%)
 }
 
 .card-image img {

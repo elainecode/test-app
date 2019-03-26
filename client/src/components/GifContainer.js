@@ -5,7 +5,7 @@ class GifContainer extends Component {
   render() {
     const {gifs, favorites, SaveOrDeleteFavorites} = this.props
     return (
-       <div class="column">
+       <div class="column is-10">
        <GifList 
         gifs={gifs}
         favorites={favorites}
