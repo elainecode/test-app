@@ -1,13 +1,9 @@
 import React, { Fragment, Component } from 'react';
-import { withRouter } from "react-router-dom";
+import { Route, Link, withRouter } from "react-router-dom";
 import logo from '../../logo.svg';
 import './nav.css';
 
 class Nav extends Component {
-
-  state = {
-    username: ''
-  }
 
 getFavoritesView = (e) => {
   e.preventDefault()
@@ -15,6 +11,10 @@ getFavoritesView = (e) => {
   this.props.history.push(`/user/${this.props.userID}/favorites`);
 }
 
+getHomeView = (e) => {
+ e.preventDefault()
+ this.props.history.push('/') 
+}
 
  register = (e) => {
   e.preventDefault()
@@ -33,23 +33,31 @@ getFavoritesView = (e) => {
 }
 
 
+logout = (e) => {
+e.preventDefault()
+localStorage.removeItem('tkn');
+ this.props.setIsLoggedIn()
+}
+
 
   render() {
-    const { displaySignupModal, displayLoginModal } = this.props
+    const { displaySignupModal, displayLoginModal, updateInput } = this.props
     return (
       <>
       <nav className="navbar is-fixed-top nav-color has-shadow"
        role="navigation" aria-label="main navigation">
        <div class="navbar-brand">
        <div class="navbar-item">
+       <Link to='/'>
        <img id='nav-logo' src={logo} alt="logo" />
+       </Link>
        </div>
        </div>
       <div id='nav-form' class="navbar-item">
-      <form>
+      <form onSubmit={this.getHomeView}>
        <div class="field has-addons">
       <div class="control is-expanded">
-    <input id='nav-input' class="input is-static" type="text" placeholder="  Search"/>
+    <input id='nav-input' onChange={updateInput} class="input is-static" type="text" placeholder="  Search"/>
        </div>
       <div class="control">
       <input id='nav-button' type='submit' class="button" value='submit'/>
@@ -74,10 +82,10 @@ getFavoritesView = (e) => {
         { this.props.isLoggedIn  &&
 
             <div class="buttons">
-          <a class="button nav-buttons" onClick={this.getFavoritesView}>
+          <a href='#' class="button nav-buttons" onClick={this.getFavoritesView}>
             Favorites
           </a>
-          <a class="button nav-buttons">
+          <a href='#' class="button nav-buttons" onClick={this.logout}>
             Log out
           </a>
         </div>

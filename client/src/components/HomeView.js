@@ -1,12 +1,14 @@
 import React, { Fragment, Component } from 'react';
 import { Route, Switch, withRouter } from "react-router-dom";
-import GifContainer from './GifContainer'
+import Gif from './Gif'
 import ScrollSearch from './ScrollSearch'
+import './css/homeview.css'
+import MaterialIcon, {colorPalette} from 'material-icons-react';
 
 class HomeView extends Component {
 
   render() {
-    const { gifs, tags, favorites, SaveOrDeleteFavorites }  = this.props
+    const { gifs, tags, favorites, SaveOrDeleteFavorites, updateInput, tagOnlySearch }  = this.props
     return (
     <>
   <div id="home-header"class="columns home-header-parent">
@@ -16,10 +18,10 @@ class HomeView extends Component {
       <h1 class="title">Shade Gifs</h1>
     <h2 class="subtitle">The <em>best</em> reaction gifs in one place</h2>
     <div class="header-form">
-     <form>
+     <form onSubmit={(e) => e.preventDefault()}>
        <div class="field has-addons">
       <div class="control">
-    <input class="input" type="text" placeholder="Search Gifs"/>
+    <input class="input" onChange={updateInput} type="text" placeholder="Search Gifs"/>
        </div>
       <div class="control">
       <input id='header-button' type='submit' class="button" value='search'/>
@@ -35,12 +37,21 @@ class HomeView extends Component {
     <div class="columns">
        <ScrollSearch
         tags={tags}
+        tagOnlySearch={tagOnlySearch}
        />
-       <GifContainer
-        gifs={gifs}
-        favorites={favorites}
-        SaveOrDeleteFavorites={SaveOrDeleteFavorites}
-        />
+         <div class="column is-10">
+           <div id="list">
+     { 
+        gifs.map(gif => 
+          <Gif 
+          gif={gif} 
+          favorites={favorites} 
+          SaveOrDeleteFavorites={SaveOrDeleteFavorites}
+          />
+          )
+       }
+      </div>
+         </div>
        </div> 
        </>   
     );

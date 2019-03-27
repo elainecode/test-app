@@ -5,12 +5,11 @@ import MaterialIcon, {colorPalette} from 'material-icons-react';
 
 class Gif extends Component {
 
-constructor(props) {
-super(props)
-  this.state = {
-      fave: this.props.favorites.includes(this.props.gif.uid) ? 'favorite' : 'favorite_border'
-  }
+
+state = {
+  fave: this.props.favorites.includes(this.props.gif.uid) 
 }
+  
 
 viewGif = () => {
    const { gif }  = this.props
@@ -18,28 +17,27 @@ viewGif = () => {
    this.props.history.push(title);
 } 
 
-toggleFaves = (fave_value) => {
-  this.saveChanges(fave_value)
+toggleFaves = () => {
+  this.setState({fave: !this.state.fave})
   this.props.SaveOrDeleteFavorites(this.props.gif.uid) 
 }
 
-saveChanges = (fave_value) => {
-switch(fave_value) {
-  case 'favorite_border':
-        this.setState({fave: 'favorite'})
-    break;
-  case 'favorite':
-    this.setState({fave: 'favorite_border'})
-    break;
-  default:
-}
-}
+// saveChanges = (fave_value) => {
+// switch(fave_value) {
+//   case 'favorite_border':
+//         this.setState({fave: 'favorite'})
+//     break;
+//   case 'favorite':
+//     this.setState({fave: 'favorite_border'})
+//     break;
+//   default:
+// }
+// }
 
 
 handleClick = (e) => {
 e.stopPropagation();
-console.log(this.props.favorites.includes(this.props.gif.uid))
-this.toggleFaves(this.state.fave)
+this.toggleFaves()
 }
 
 
@@ -50,21 +48,27 @@ this.toggleFaves(this.state.fave)
         <div  onClick={viewGif} class="card-image">
         <span  onClick={handleClick} class="heart">
 
-       { this.state.fave === 'favorite_border' &&
-        <MaterialIcon 
-        size="small"
-        icon='favorite_border'
-        color={colorPalette.pink.A100} 
-        />
-      }
+    { 
+      this.state.fave &&
 
-      { this.state.fave === 'favorite' &&
-         <MaterialIcon 
+        <MaterialIcon 
         size="small"
         icon='favorite'
         color={colorPalette.pink.A100} 
         />
+    }
+      {
+
+      !this.state.fave &&
+
+       <MaterialIcon 
+        size="small"
+        icon='favorite_border'
+        color={colorPalette.pink.A100} 
+        />
+
       }
+    
     
          </span>
         

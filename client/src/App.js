@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import 'bulma/css/bulma.css'
 import './App.css';
 import Nav from './components/nav/Nav'
@@ -14,6 +14,7 @@ class App extends Component {
   state = {
     gifs: [],
     tags: [],
+    input: '',
     favorites: [],
     isLoggedIn: false, // check for JWT Token on CDM() call
     userID: null,
@@ -41,11 +42,18 @@ const tkn = localStorage.getItem('tkn')
       'Authorization': `Bearer ${tkn}`
     }
  })
- .then(response =>  response.json())
+ .then(response => response.json())
+ 
 }
 
 SaveOrDeleteFavorites = (gif_uid) => {
-  
+  let favorites  = [...this.state.favorites]
+  if (favorites.includes(gif_uid)) {
+    favorites.splice(favorites.indexOf(gif_uid), 1)
+  } else {
+  favorites.push(gif_uid)
+  }
+  this.setState({favorites})
 const  data = {uid: gif_uid}
 const tkn = localStorage.getItem('tkn')
 
@@ -64,14 +72,40 @@ const tkn = localStorage.getItem('tkn')
 
 fetchUser = () => {
   const tkn = localStorage.getItem('tkn')
-  console.log('tkn in app', tkn)
   return fetch('/api/v1/auth', {
       method: 'GET',
       headers: { 
       'Authorization': `Bearer ${tkn}`
     }
-    }).then(res => res.json())    
-}
+    }).then(res => res.json())
+  } 
+
+ updateInput = (e) => {
+    this.setState({ input: e.target.value})
+  }
+
+  setIsLoggedIn = () => {
+    this.setState({isLoggedIn: false})
+  }
+
+  tagOnlySearch = (e) => {
+    this.setState({input: e.target.innerText})
+  }
+
+filteredGifs = () => {
+    const { gifs, input } = this.state
+    return input === ''
+    ? gifs.filter(gif => gif.title.toLowerCase().includes(input.toLowerCase()))
+    : gifs.filter(gif => gif.title.toLowerCase().includes(input.toLowerCase()) ||
+      gif.tags.includes(input.toLowerCase()))
+  }
+
+  filteredFavorites = () => {
+    const { gifs, favorites } = this.state
+    return favorites.length > 0 
+    ? gifs.filter(gif => favorites.includes(gif.uid))
+    : null 
+  }
 
 displaySignupModal = (e) => {
   console.log('sign up modal opened')
@@ -88,23 +122,50 @@ updateIsLoggedIn = (e) => {
 }
 
 componentDidMount = () => {
-  this.fetchGifs()
-  .then(gifs => this.setState({gifs}))
+  const tkn = localStorage.getItem('tkn')
+  if (tkn != null || undefined) {
+  console.log('??????')
   this.fetchTags()
   .then(tags => this.setState({tags})) 
-  this.fetchUser()
-  .then(user => {
-    this.setState({userID: user.id})
-    this.updateIsLoggedIn()
-  })
-  this.fetchFavorites() 
-  .then(response => {
+   this.fetchFavorites()
+   .then(response => {
+    if (response.length) {
     const favorites = response.map(data => data.uid)
     this.setState({favorites})
+  }
+  }).then(() => this.fetchGifs())
+    .then(gifs => this.setState({gifs}))
+    .then(() => this.fetchUser())
+    .then(user => {
+    if (user) {
+    console.log(user.id)
+    this.setState({userID: user.id})
+    this.updateIsLoggedIn()
+  }
   })
+
+  } else {
+     console.log('YESSS')
+      this.fetchTags()
+     .then(tags => this.setState({tags}))
+     this.fetchGifs()
+    .then(gifs => this.setState({gifs}))
+  }  
+  
 }
   render() {
-    const { displaySignupModal, displayLoginModal, updateIsLoggedIn, SaveOrDeleteFavorites } = this
+    const { 
+      displaySignupModal, 
+      displayLoginModal,
+       updateIsLoggedIn, 
+       updateInput,
+       setIsLoggedIn,
+       fetchFavorites,
+       tagOnlySearch,
+       filteredFavorites,
+       filteredGifs,
+       SaveOrDeleteFavorites 
+     } = this
     const {
       gifs,
       favorites, 
@@ -120,7 +181,9 @@ componentDidMount = () => {
        <Nav 
        displaySignupModal={displaySignupModal}
        displayLoginModal={displayLoginModal}
+       updateInput={updateInput}
        isLoggedIn={isLoggedIn}
+       setIsLoggedIn={setIsLoggedIn}
        userID={userID}
        />
        { signupModal &&
@@ -134,9 +197,30 @@ componentDidMount = () => {
         />
      }
        <Switch>
-        <Route exact path='/' render={(props) => <HomeView {...props}  SaveOrDeleteFavorites={SaveOrDeleteFavorites} favorites={favorites} tags={tags} gifs={gifs} />} />
+        <Route exact path='/' render={(props) => 
+          <HomeView {...props}  
+            SaveOrDeleteFavorites={SaveOrDeleteFavorites} 
+            updateInput={updateInput} 
+            tagOnlySearch={tagOnlySearch} 
+            favorites={favorites} 
+            tags={tags} 
+            gifs={filteredGifs()} 
+            />
+          } 
+          />
          <Route path='/gifs/:title' render={(props) => <GifView {...props} favorites={favorites} SaveOrDeleteFavorites={SaveOrDeleteFavorites} gifs={gifs} />} />
-          <Route path='/user/:id/favorites' render={(props) => <FavoritesView {...props} SaveOrDeleteFavorites={SaveOrDeleteFavorites} favorites={favorites} isLoggedIn={isLoggedIn} />} />
+          isLoggedIn
+          <Route path='/user/:id/favorites' render={(props) => 
+            isLoggedIn === true
+            ? <FavoritesView {...props} 
+            SaveOrDeleteFavorites={SaveOrDeleteFavorites}
+            favorites={favorites} 
+            gifs={filteredFavorites()} 
+            isLoggedIn={isLoggedIn}
+             />
+            : <Redirect to='/'/>
+          } 
+            />
        </Switch>
        </>
     );

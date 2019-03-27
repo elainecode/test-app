@@ -4,35 +4,48 @@ import './css/signupmodal.css';
 class SignupModal extends Component {
 
   state = {
-    username: ''
+    username: '',
+    email: '',
+    password: ''
   }
 
-//  register = (e) => {
-//   e.preventDefault()
-//   const data = { 
-//     email: "bfgheantailnyy@pbjkids.com",
-//     username: "tafghilbnubeanjobb",
-//     password: "nhjjhghjyyailnbeanommybujj",
-//     tags: ["mistake..."]
-//     }
-//    fetch('/api/v1/login', {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json'},
-//       body: JSON.stringify(data)
-//     }).then(res => res.json())
-//       .then( resp => console.log("?????", resp))
-// }
+  updateInput = (e) => {
+   this.setState({[e.target.name]: e.target.value})
+  }
+
+ register = (e) => {
+  e.preventDefault()
+  const data = { 
+   ...this.state,
+    tags: ["mistake..."]
+    }
+    if(data.username != '' && data.email != '' && data.password != '' ) {
+      console.log('??are you even fetching??')
+   fetch('/api/v1/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    }).then(res => res.json())
+      .then( resp => {
+        console.log("?????", resp)
+        this.props.displaySignupModal()
+    })
+    }
+}
+
 
 
   render() {
     const {displaySignupModal} = this.props
+    const { updateInput, register } = this
+
     return (
       <>
         <div class="modal-background" onClick={displaySignupModal}></div>
       <div id="signup" class="card">
  
   <div class="card-content">
-  <form>
+  <form onSubmit={register}>
   <a id="delete" class="delete is-small" onClick={displaySignupModal}></a>
   <p class="title is-4">Sign up</p>
   
@@ -40,25 +53,24 @@ class SignupModal extends Component {
 <div class="field">
   <label class="label">Username</label>
   <div class="control">
-    <input class="input" type="text" placeholder="username" value=""/>
+    <input class="input" name="username" onChange={updateInput} type="text" placeholder="username"/>
 </div>
 </div>
 
 <div class="field">
   <label class="label">Email</label>
   <div class="control">
-    <input class="input" type="email" placeholder="Email" value=""/>
+    <input class="input" onChange={updateInput} name="email" type="email" placeholder="Email"/>
   </div>
 </div>
 
 <div class="field">
   <label class="label">Password</label>
   <div class="control">
-    <input class="input" type="password" placeholder="Password" value=""/>
+    <input class="input" onChange={updateInput} name="password" type="password" placeholder="Password"/>
   </div>
 </div>
-
-   <a class="button form-button">Sign up</a>
+   <input type='submit' class="button form-button" value='Sign up'/>
      </form>
   </div>
 

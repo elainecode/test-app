@@ -46,7 +46,7 @@ app.post('/api/v1/login', async (req, res, next) => {
       return res.json(err || info)
     } else {
       console.log('user', user)
-      const token = jwt.sign({id: user.username}, process.env.SECRET)
+      const token = jwt.sign({id: user.username}, process.env.SECRET, {expiresIn: '1d'})
       return res.status(200).send({ user: user, token: token})
     }
   })(req, res, next)

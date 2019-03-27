@@ -17,6 +17,7 @@ class LoginModal extends Component {
    e.preventDefault()
    console.log('inside form')
   const data = {...this.state}
+if (data.username  != '' && data.password != '') {
    fetch('/api/v1/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
@@ -24,10 +25,13 @@ class LoginModal extends Component {
     }).then(res => res.json())
       .then(user => {
         console.log(user, user.token)
+        if (!user.message) {
         localStorage.setItem('tkn', user.token)
         this.props.updateIsLoggedIn()
         this.props.displayLoginModal()
+      }
       })
+    }
       // .then(this.props.updateIsLoggedIn() )
   }
 
