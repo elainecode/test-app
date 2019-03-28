@@ -56,7 +56,7 @@ class GifView extends Component {
         <div class="columns">
           <div class="column is-one-fifth"></div>
             <div class="column is-three-fifths">
-            <h4 class="title is-4">{gif.title} gif</h4>
+            <h4 class="title spacer">{gif.title} gif</h4>
               <div id="gifselected" class="card-image">
                 <img  src={gif.url} alt={gif.title}/>
             </div>
@@ -122,7 +122,7 @@ class GifView extends Component {
               <hr/>
           </div>
           <div class="column">
-          <h4 class="title is-4">Related</h4>
+          <h4 class="title spacer">Related</h4>
            <div class="related">
            { 
         related
