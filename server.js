@@ -2,7 +2,6 @@ const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const cors = require('cors')
-const path = require('path')
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const PORT = process.env.PORT || 4000;
@@ -25,7 +24,6 @@ require('./auth');
 //When the user sends a post request to this route, passport authenticates the user based on the
 //middleware created previously
 
- app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use( async (err, req, res, next) => {
   console.log("our middleware ran!" || err.message);
@@ -113,9 +111,12 @@ app.get('/api/v1/tags', async (req, res, next) => {
     };
 });
 
-
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  if (process.env.NODE_ENV === 'production') {
+     app.use(express.static(path.join(__dirname, 'client/build')));
+     const path = require('path')
+     app.get('*', function(req, res) {
+      res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
+}
 
 app.listen(PORT, () => console.log('running'))
