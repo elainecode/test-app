@@ -24,6 +24,8 @@ require('./auth');
 //When the user sends a post request to this route, passport authenticates the user based on the
 //middleware created previously
 
+ app.use(express.static(path.join(__dirname, 'client/build')));
+
 app.use( async (err, req, res, next) => {
   console.log("our middleware ran!" || err.message);
   return next();
@@ -111,7 +113,6 @@ app.get('/api/v1/tags', async (req, res, next) => {
 });
 
 
- app.use(express.static(path.join(__dirname, 'client/build')));
   app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
