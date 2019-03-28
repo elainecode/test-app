@@ -7,13 +7,15 @@ const morgan = require("morgan");
 const PORT = process.env.PORT || 4000;
 const app = express();
 
-const environment = process.env.NODE_ENV || 'development';
+const environment = process.env.NODE_ENV || 'production';
 const configuration = require('./knexfile')[environment];
 const db = require('knex')(configuration);
 
 app.use(cors());
 app.options('*', cors());
 app.use(bodyParser.json());
+
+require('dotenv').config({path: './.env'});
 
 require('./auth');
 

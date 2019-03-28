@@ -13,7 +13,6 @@ const {
 
 = require('./authHelper');
 
-
 //Create a passport middleware to handle user registration
 passport.use('signup', new localStrategy({
   usernameField: 'email',

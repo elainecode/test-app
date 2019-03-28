@@ -12,7 +12,7 @@ const base = new Airtable({apiKey: API_KEY}).base(BASE);
 firstTenRecords: async () => {
  let tableRecords = await 
   base('Table 1')
-  .select({ maxRecords: 10, view: "Grid view"})
+  .select({ maxRecords: 60, view: "Grid view"})
   .firstPage().then(async (records) => {
           return records.map( record => {   
           return {

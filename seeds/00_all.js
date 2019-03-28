@@ -4,18 +4,18 @@ const userData = retrieve.fewUsers();
 
 exports.seed = async (knex, Promise) => {
   // Deletes ALL existing entries
-  return knex('gifs').del()
-    .then( () => {
-      return knex('users').del()
-    })
+  return knex('hashtags').del()
     .then( () => {
       return knex('favorites').del()
+    })
+    .then( () => {
+      return knex('users').del()
     })
     .then( () => {
       return knex('tags').del()
     })
     .then( () => {
-      return knex('hashtags').del()
+      return knex('gifs').del()
     })
     .then( async () => {
       return knex('users').returning('*').insert(userData)
