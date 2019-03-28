@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const cors = require('cors')
+const path = require('path')
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const PORT = process.env.PORT || 4000;
