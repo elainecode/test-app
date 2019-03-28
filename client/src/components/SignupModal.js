@@ -21,7 +21,7 @@ class SignupModal extends Component {
     }
     if(data.username != '' && data.email != '' && data.password != '' ) {
       console.log('??are you even fetching??')
-   fetch('/api/v1/signup', {
+   fetch('https://lit-dusk-44111.herokuapp.com/api/v1/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(data)

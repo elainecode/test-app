@@ -24,18 +24,18 @@ class App extends Component {
   }
 
   fetchGifs = ()  => {
-  return fetch('/api/v1/gifs')
+  return fetch('https://lit-dusk-44111.herokuapp.com/api/v1/gifs')
   .then(response => response.json())
 }
 
 fetchTags = ()  => {
-  return fetch('/api/v1/tags')
+  return fetch('https://lit-dusk-44111.herokuapp.com/api/v1/tags')
   .then(response =>  response.json())
 }
 
 fetchFavorites = () => {
 const tkn = localStorage.getItem('tkn')
- return fetch('/api/v1/auth/favorites', {
+ return fetch('https://lit-dusk-44111.herokuapp.com/api/v1/auth/favorites', {
   method: 'GET',
     headers: { 
       'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ const tkn = localStorage.getItem('tkn')
 
   console.log('adding favorites....: ', data.uid)
   
-  fetch('/api/v1/auth/favorites/toggle', {
+  fetch('https://lit-dusk-44111.herokuapp.com/api/v1/auth/favorites/toggle', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const tkn = localStorage.getItem('tkn')
 
 fetchUser = () => {
   const tkn = localStorage.getItem('tkn')
-  return fetch('/api/v1/auth', {
+  return fetch('https://lit-dusk-44111.herokuapp.com/api/v1/auth', {
       method: 'GET',
       headers: { 
       'Authorization': `Bearer ${tkn}`

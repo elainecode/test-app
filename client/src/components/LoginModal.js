@@ -18,7 +18,7 @@ class LoginModal extends Component {
    console.log('inside form')
   const data = {...this.state}
 if (data.username  != '' && data.password != '') {
-   fetch('/api/v1/login', {
+   fetch('https://lit-dusk-44111.herokuapp.com/api/v1/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(data)
