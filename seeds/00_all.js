@@ -4,9 +4,9 @@ const userData = retrieve.fewUsers();
 
 exports.seed = async (knex, Promise) => {
   // Deletes ALL existing entries
-  return knex('hashtags').del()
+  return knex('favorites').del()
     .then( () => {
-      return knex('favorites').del()
+      return knex('hashtags').del()
     })
     .then( () => {
       return knex('users').del()
