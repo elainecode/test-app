@@ -111,12 +111,5 @@ app.get('/api/v1/tags', async (req, res, next) => {
     };
 });
 
-  if (process.env.NODE_ENV === 'production') {
-    const path = require('path')
-     app.use(express.static(path.join(__dirname, 'client/build')));
-     app.get('*', function(req, res) {
-      res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-  });
-}
 
 app.listen(PORT, () => console.log('running'))
