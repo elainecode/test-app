@@ -20,14 +20,12 @@ class SignupModal extends Component {
     tags: ["mistake..."]
     }
     if(data.username != '' && data.email != '' && data.password != '' ) {
-      console.log('??are you even fetching??')
    fetch('https://lit-dusk-44111.herokuapp.com/api/v1/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(data)
     }).then(res => res.json())
       .then( resp => {
-        console.log("?????", resp)
         this.props.displaySignupModal()
     })
     }

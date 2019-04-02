@@ -19,11 +19,6 @@ require('dotenv').config({path: './.env'});
 
 require('./auth');
 
-//const router = express.Router();
-
-//When the user sends a post request to this route, passport authenticates the user based on the
-//middleware created previously
-
 
 app.use( async (err, req, res, next) => {
   console.log("our middleware ran!" || err.message);

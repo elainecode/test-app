@@ -15,7 +15,6 @@ class LoginModal extends Component {
 
   login = (e) => {
    e.preventDefault()
-   console.log('inside form')
   const data = {...this.state}
 if (data.username  != '' && data.password != '') {
    fetch('https://lit-dusk-44111.herokuapp.com/api/v1/login', {
@@ -24,7 +23,6 @@ if (data.username  != '' && data.password != '') {
       body: JSON.stringify(data)
     }).then(res => res.json())
       .then(user => {
-        console.log(user, user.token)
         if (!user.message) {
         localStorage.setItem('tkn', user.token)
         this.props.updateIsLoggedIn()
@@ -32,25 +30,7 @@ if (data.username  != '' && data.password != '') {
       }
       })
     }
-      // .then(this.props.updateIsLoggedIn() )
   }
-
-//  register = (e) => {
-//   e.preventDefault()
-//   const data = { 
-//     email: "bfgheantailnyy@pbjkids.com",
-//     username: "tafghilbnubeanjobb",
-//     password: "nhjjhghjyyailnbeanommybujj",
-//     tags: ["mistake..."]
-//     }
-//    fetch('/api/v1/login', {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json'},
-//       body: JSON.stringify(data)
-//     }).then(res => res.json())
-//       .then( resp => console.log("?????", resp))
-// }
-
 
   render() {
 

@@ -22,18 +22,6 @@ toggleFaves = () => {
   this.props.SaveOrDeleteFavorites(this.props.gif.uid) 
 }
 
-// saveChanges = (fave_value) => {
-// switch(fave_value) {
-//   case 'favorite_border':
-//         this.setState({fave: 'favorite'})
-//     break;
-//   case 'favorite':
-//     this.setState({fave: 'favorite_border'})
-//     break;
-//   default:
-// }
-// }
-
 
 handleClick = (e) => {
 e.stopPropagation();

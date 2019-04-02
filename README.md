@@ -4,6 +4,8 @@
 
 SPA, single page application designed to view and sort gifs by reaction. 
 
+API hosted on Heroku! [Here](https://lit-dusk-44111.herokuapp.com/api/v1/gifs)
+
 ![homepage](https://github.com/elainecode/test-app/blob/master/test.png)
 
 ### Features

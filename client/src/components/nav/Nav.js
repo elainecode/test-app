@@ -16,22 +16,6 @@ getHomeView = (e) => {
  this.props.history.push('/') 
 }
 
-//  register = (e) => {
-//   e.preventDefault()
-//   const data = { 
-//     email: "bfgheantailnyy@pbjkids.com",
-//     username: "tafghilbnubeanjobb",
-//     password: "nhjjhghjyyailnbeanommybujj",
-//     tags: ["mistake..."]
-//     }
-//    fetch('/api/v1/login', {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json'},
-//       body: JSON.stringify(data)
-//     }).then(res => res.json())
-//       .then( resp => console.log("?????", resp))
-// }
-
 
 logout = (e) => {
 e.preventDefault()

@@ -16,7 +16,7 @@ class App extends Component {
     tags: [],
     input: '',
     favorites: [],
-    isLoggedIn: false, // check for JWT Token on CDM() call
+    isLoggedIn: false,
     userID: null,
     signupModal: false,
     loginModal: false
@@ -57,7 +57,6 @@ SaveOrDeleteFavorites = (gif_uid) => {
 const  data = {uid: gif_uid}
 const tkn = localStorage.getItem('tkn')
 
-  console.log('adding favorites....: ', data.uid)
   
   fetch('https://lit-dusk-44111.herokuapp.com/api/v1/auth/favorites/toggle', {
       method: 'POST',
@@ -108,12 +107,10 @@ filteredGifs = () => {
   }
 
 displaySignupModal = (e) => {
-  console.log('sign up modal opened')
   this.setState({signupModal: !this.state.signupModal})
 }
 
 displayLoginModal = (e) => {
-  console.log('login modal open')
   this.setState({loginModal: !this.state.loginModal})
 }
 
@@ -124,7 +121,6 @@ updateIsLoggedIn = (e) => {
 componentDidMount = () => {
   const tkn = localStorage.getItem('tkn')
   if (tkn != null || undefined) {
-  console.log('??????')
   this.fetchTags()
   .then(tags => this.setState({tags})) 
    this.fetchFavorites()
@@ -138,14 +134,12 @@ componentDidMount = () => {
     .then(() => this.fetchUser())
     .then(user => {
     if (user) {
-    console.log(user.id)
     this.setState({userID: user.id})
     this.updateIsLoggedIn()
   }
   })
 
   } else {
-     console.log('YESSS')
       this.fetchTags()
      .then(tags => this.setState({tags}))
      this.fetchGifs()
