@@ -34,3 +34,20 @@
   height: 3rem;
   max-height: 3rem;
 }
+
+@media screen and (max-width: 1088px) {
+  .navbar-end, .navbar-item {
+    display: inline-block;
+  }
+  .navbar-end {
+    margin-left: 10%;
+  }
+
+  #nav-form {
+  width: 70%;
+}
+  .navbar-brand {
+    display: none;
+  }
+
+}
