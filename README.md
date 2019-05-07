@@ -1,4 +1,4 @@
-## Reaction Gif App - Backend
+## Reaction Gif Search Engine  - Backend
 
 The API is hosted on [Heroku](https://lit-dusk-44111.herokuapp.com/api/v1/gifs)
 
