@@ -1,12 +1,10 @@
-## Reaction Gif App -- Single Page Application
+## Reaction Gif App - Backend
 
 ### Description
 
-SPA, single page application designed to view and sort gifs by reaction. 
+API hosted on [Heroku](https://lit-dusk-44111.herokuapp.com/api/v1/gifs)
 
-API hosted on Heroku! [Here](https://lit-dusk-44111.herokuapp.com/api/v1/gifs)
-
-![homepage](https://github.com/elainecode/test-app/blob/master/test.png)
+![View of the frontend](https://github.com/elainecode/test-app/blob/master/test.png)
 
 ### Features
 
@@ -17,5 +15,4 @@ API hosted on Heroku! [Here](https://lit-dusk-44111.herokuapp.com/api/v1/gifs)
 
 ### Technologies Used
 
-- Frontend: React
 - Backend:  Node, Express, Postgresql
