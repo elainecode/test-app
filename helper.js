@@ -67,8 +67,3 @@ fewUsers: () => {
 
 }
 
-// const items = async (cb) => {
-//   let my_records = await cb()
-//    return my_records
-// }
-
